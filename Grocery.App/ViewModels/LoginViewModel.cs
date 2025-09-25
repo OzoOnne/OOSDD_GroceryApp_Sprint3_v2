@@ -19,6 +19,23 @@ namespace Grocery.App.ViewModels
 
         [ObservableProperty]
         private string loginMessage;
+        
+        [ObservableProperty] private bool isLoginVisible = true;
+        [ObservableProperty] private bool isRegisterVisibile = false;
+        
+        [RelayCommand]
+        private void ShowLogin()
+        {
+            IsLoginVisible = true;
+            IsRegisterVisibile = false;
+        }
+
+        [RelayCommand]
+        private void ShowRegister()
+        {
+            IsRegisterVisibile = true;
+            IsLoginVisible = false;
+        }
 
         public LoginViewModel(IAuthService authService, GlobalViewModel global)
         { //_authService = App.Services.GetServices<IAuthService>().FirstOrDefault();
@@ -40,6 +57,12 @@ namespace Grocery.App.ViewModels
             {
                 LoginMessage = "Ongeldige inloggegevens.";
             }
+        }
+        
+        [RelayCommand]
+        private void Register()
+        {
+            Console.WriteLine("test");
         }
     }
 }
