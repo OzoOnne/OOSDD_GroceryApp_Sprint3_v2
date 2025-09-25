@@ -19,6 +19,8 @@
         </StackLayout>
         
         <StackLayout Grid.Row="1" IsVisible="{Binding IsRegisterVisibile}">
+            
+            <Entry Placeholder="Name" Text="{Binding Name}" />
             <Entry Placeholder="Email" Text="{Binding Email}" />
             <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
             <Button Text="Register" Command="{Binding RegisterCommand}" />

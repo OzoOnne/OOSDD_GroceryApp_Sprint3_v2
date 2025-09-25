@@ -12,6 +12,9 @@ namespace Grocery.App.ViewModels
         private readonly GlobalViewModel _global;
 
         [ObservableProperty]
+        private string name = "John Doe";
+        
+        [ObservableProperty]
         private string email = "user3@mail.com";
 
         [ObservableProperty]
@@ -62,7 +65,18 @@ namespace Grocery.App.ViewModels
         [RelayCommand]
         private void Register()
         {
-            Console.WriteLine("test");
+            Client? newClient = _authService.Register(Name, Email, Password);
+
+            if (newClient != null)
+            {
+                LoginMessage = $"Account aangemaakt! Welkom {newClient.Name}.";
+                _global.Client = newClient;
+                Application.Current.MainPage = new AppShell();
+            }
+            else
+            {
+                LoginMessage = "Registreren mislukt. Probeer een ander e-mailadres.";
+            }
         }
     }
 }
