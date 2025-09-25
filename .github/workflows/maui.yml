@@ -30,8 +30,17 @@ jobs:
       - name: Herstel afhankelijkheden
         run: dotnet restore
  
-      - name: Bouw de applicatie
-        run: dotnet build -f net8.0-android --configuration Release --no-restore
- 
+      - name: Build libraries
+        run: dotnet build Grocery.Core.Data/Grocery.Core.Data.csproj -f net8.0 --configuration Release --no-restore
+      
+      - name: Build core
+        run: dotnet build Grocery.Core/Grocery.Core.csproj -f net8.0 --configuration Release --no-restore
+      
+      - name: Build tests
+        run: dotnet build TestCore/TestCore.csproj -f net8.0 --configuration Release --no-restore
+      
+      - name: Build app
+        run: dotnet build Grocery.App/Grocery.App.csproj -f net8.0-android --configuration Release --no-restore
+
       - name: Voer unit tests uit
         run: dotnet test --configuration Release --no-restore --no-build --verbosity normal
